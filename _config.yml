@@ -1,0 +1,8 @@
+title: DP6 - Centro de inovações
+initiative: 'Marketing Data Sync'
+
+remote_theme: dp6/dp6.github.io
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-gzip

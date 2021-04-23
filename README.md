@@ -1,8 +1,22 @@
-# Megalista
+# MDS - Marketing Data Sync
 
-Sample integration code for onboarding offline/CRM data from BigQuery as custom audiences or offline conversions in Google Ads, Google Analytics 360, Google Display & Video 360 and Google Campaign Manager.
+Solution based on the [Google Megalista project](https://github.com/google/megalista).
 
-**Disclaimer:** This is not an officially supported Google product.
+<div align="center">
+  <img src="https://raw.githubusercontent.com/DP6/templates-centro-de-inovacoes/main/public/images/centro_de_inovacao_dp6.png" height="100px" />
+</div>
+
+<p align="center">
+  <a href="#badge">
+    <img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
+  </a>
+  <a href="https://www.codacy.com/gh/DP6/marketing-data-sync/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DP6/marketing-data-sync&amp;utm_campaign=Badge_Grade">
+    <img alt="Code quality" src="https://app.codacy.com/project/badge/Grade/4bb28565a8b241abae247e6e84778723"/>
+  </a>
+
+</p>
+
+Sample integration code for onboarding offline/CRM data from BigQuery as custom audiences or offline conversions in Google Ads, Google Analytics 360, Google Display & Video 360, Google Campaign Manager and Facebook Ads.
 
 ## Supported integrations
 - **Google Ads**
@@ -25,7 +39,7 @@ Sample integration code for onboarding offline/CRM data from BigQuery as custom 
   - S2S Offline events API (conversion upload), to be used for audience creation and in-app events with Google Ads and DV360 [[details]](https://support.appsflyer.com/hc/en-us/articles/207034486-API-de-eventos-de-servidor-para-servidor-S2S-mobile-para-mobile)
 
 ## How does it work
-Megalista was design to separate the configuration of conversion/audience upload rules from the engine, giving more freedom for non-technical teams (i.e. Media and Business Inteligence) to setup multiple upload rules on their own.
+MDS was design to separate the configuration of conversion/audience upload rules from the engine, giving more freedom for non-technical teams (i.e. Media and Business Inteligence) to setup multiple upload rules on their own.
 
 The solution consists in #1 a Google Spreadsheet (template) in which all rules are defined by mapping a data source (BigQuery Table) to a destination (data upload endpoint) and #2, an apache beam workflow running on Google Dataflow, scheduled to upload the data in batch mode.
 
@@ -46,7 +60,7 @@ The solution consists in #1 a Google Spreadsheet (template) in which all rules a
 - **Google Cloud SDK**
 
 ### Access Requirements
-Those are the minimum roles necessary to deploy Megalista:
+Those are the minimum roles necessary to deploy MDS:
 - OAuth Config Editor
 - BigQuery User
 - BigQuery Job User
@@ -81,23 +95,23 @@ In order to create it, follow these steps:
  - On the **OAuth Consent Screen** and configure an *Application name*
  - Then, go to the **Credentials** and create an *OAuth client Id* with Application type set as *Desktop App*
  - This will generate a *Client Id* and a *Client secret*
- - Run the **generate_megalist_token.sh** script in this folder providing these two values and follow the instructions
-   - Sample: `./generate_megalist_token.sh client_id client_secret`
+ - Run the **generate_mds_token.sh** script in this folder providing these two values and follow the instructions
+   - Sample: `./generate_mds_token.sh client_id client_secret`
  - This will generate the *Access Token* and the *Refresh token*
 
 ### Creating a bucket on Cloud Storage
 This bucket will hold the deployed code for this solution. To create it, navigate to the *Storage* link on the top-left menu on GCP and click on *Create bucket*. You can use Regional location and Standard data type for this bucket.
 
-## Running Megalista
+## Running MDS
 
 We recommend first running it locally and make sure that everything works. 
 Make some sample tables on BigQuery for one of the uploaders and make sure that the data is getting correctly to the destination.
 After that is done, upload the Dataflow template to GCP and try running it manually via the UI to make sure it works.
-Lastly, configure the Cloud Scheduler to run Megalista in the frequency desired and you'll have a fully functional data integration pipeline.
+Lastly, configure the Cloud Scheduler to run MDS in the frequency desired and you'll have a fully functional data integration pipeline.
 
 ### Running locally
 ```bash
-python3 megalist_dataflow/main.py \
+python3 mds_dataflow/main.py \
   --runner DirectRunner \
   --developer_token ${GOOGLE_ADS_DEVELOPER_TOKEN} \
   --setup_sheet_id ${CONFIGURATION_SHEET_ID} \
@@ -119,7 +133,7 @@ To execute the pipeline, use the following steps:
 - Go to **Dataflow** on GCP console
 - Click on *Create job from template*
 - On the template selection dropdown, select *Custom template* 
-- Find the *megalist* file on the bucket you've created, on the templates folder
+- Find the *mds* file on the bucket you've created, on the templates folder
 - Fill in the parameters required and execute
 
 ### Scheduling pipeline
@@ -127,7 +141,7 @@ To schedule daily/hourly runs, go to **Cloud Scheduler**:
 - Click on *create job* 
 - Add a name and frequency as desired
 - For *target* set as HTTP
-- Configure a *POST* for url: https://dataflow.googleapis.com/v1b3/projects/${YOUR_PROJECT_ID}/locations/${LOCATION}/templates:launch?gcsPath=gs://${BUCKET_NAME}/templates/megalist, replacing the params with the actual values
+- Configure a *POST* for url: https://dataflow.googleapis.com/v1b3/projects/${YOUR_PROJECT_ID}/locations/${LOCATION}/templates:launch?gcsPath=gs://${BUCKET_NAME}/templates/mds, replacing the params with the actual values
 - For a sample on the *body* of the request, check **cloud_config/scheduler.json**
 - Add OAuth Headers
 - Scope: https://www.googleapis.com/auth/cloud-platform
@@ -142,4 +156,18 @@ It's recommended to create a new Service Account to be used with the Cloud Sched
 
 
 ## Usage
-Every upload method expects as source a BigQuery data with specific fields, in addition to specific configuration metadata. For details on how to setup your upload routines, refer to the [Megalista Wiki](https://github.com/google/megalista/wiki) or the [Megalista user guide](https://github.com/google/megalista/blob/main/documentation/Megalista%20-%20Technical%20User%20Guide%20-%20EXTERNAL.pdf).
+Every upload method expects as source a BigQuery data with specific fields, in addition to specific configuration metadata. For details on how to setup your upload routines, refer to the [MDS Wiki](https://github.com/dp6/marketing-data-sync/wiki) or the [MDS user guide](https://github.com/dp6/marketing-data-sync/blob/main/documentation/mds%20-%20Technical%20User%20Guide%20-%20EXTERNAL.pdf).
+
+### Mandatory requirements
+
+Only contributions that meet the following requirements will be accepted:
+
+- [Commit pattern](https://www.conventionalcommits.org/en/v1.0.0/)
+
+## Support:
+
+**DP6 Koopa-troopa Team**
+
+_e-mail: <koopas@dp6.com.br>_
+
+<img src="https://raw.githubusercontent.com/DP6/templates-centro-de-inovacoes/main/public/images/koopa.png" height="100" />

@@ -32,7 +32,7 @@ def get_ads_service(service_name, version, oauth_credentials, developer_token,
     client = adwords.AdWordsClient(
         developer_token,
         oauth2_client,
-        'MegaList Dataflow',
+        'Mds Dataflow',
         client_customer_id=customer_id)
     return client.GetService(service_name, version=version)
 

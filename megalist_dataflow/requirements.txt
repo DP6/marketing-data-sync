@@ -9,7 +9,7 @@ apache-beam==2.28.0
 google-cloud-datastore==1.13.1
 google-apitools==0.5.31
 pytest==5.4.3
-pytest-cov==2.10.0
+pytest-cov==2.11.1
 pytest-mock==3.2.0
 requests-mock==1.8.0
 pytz==2020.1

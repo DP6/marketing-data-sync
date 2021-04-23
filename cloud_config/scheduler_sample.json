@@ -1,5 +1,5 @@
 {
-    "jobName": "megalist_daily",
+    "jobName": "mds_daily",
     "parameters": {
         "developer_token": "Google Ads Developer Token",
         "client_id": "GCP OAuth Client id",
@@ -7,11 +7,11 @@
         "access_token": "GCP OAuth access token",
         "refresh_token": "GCP OAuth refresh token",
         "setup_sheet_id": "Setup Google Sheets Id",
-        "bq_ops_dataset": "Auxliary bigquery dataset used for Megalista operations",
+        "bq_ops_dataset": "Auxliary bigquery dataset used for MDS operations",
 	"appsflyer_dev_key": "Apps flyer dev key"
     },
     "environment": {
-        "tempLocation": "gs://megalist-data/temp",
+        "tempLocation": "gs://bucket-name/temp",
         "zone": "us-central1-f"
     }
 }

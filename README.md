@@ -13,6 +13,7 @@ Solution based on the [Google Megalista project](https://github.com/google/megal
   <a href="https://www.codacy.com/gh/DP6/marketing-data-sync/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DP6/marketing-data-sync&amp;utm_campaign=Badge_Grade">
     <img alt="Code quality" src="https://app.codacy.com/project/badge/Grade/4bb28565a8b241abae247e6e84778723"/>
   </a>
+
 </p>
 
 Sample integration code for onboarding offline/CRM data from BigQuery as custom audiences or offline conversions in Google Ads, Google Analytics 360, Google Display & Video 360, Google Campaign Manager and Facebook Ads.

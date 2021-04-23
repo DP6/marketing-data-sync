@@ -68,7 +68,7 @@ class DataflowOptions(PipelineOptions):
         help='Name of the Conversion Plus Sheet config range')
     # BigQuery
     parser.add_value_provider_argument(
-        '--dataset_id', default='megalist', help='BigQuery dataset Id')
+        '--dataset_id', default='megalista', help='BigQuery dataset Id')
     parser.add_value_provider_argument(
         '--table_id', default='crm_upload', help='BigQuery dataset Id')
     # GCP

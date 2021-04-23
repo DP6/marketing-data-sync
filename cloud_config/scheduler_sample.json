@@ -11,7 +11,7 @@
 	"appsflyer_dev_key": "Apps flyer dev key"
     },
     "environment": {
-        "tempLocation": "gs://megalist-data/temp",
+        "tempLocation": "gs://buckt-to-tmp-data",
         "zone": "us-central1-f"
     }
 }

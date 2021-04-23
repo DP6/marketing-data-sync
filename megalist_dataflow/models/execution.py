@@ -19,7 +19,9 @@ OK_STATUS = 'OK'
 
 
 class DestinationType(Enum):
-    CM_OFFLINE_CONVERSION, \
+    FB_OFFLINE_CONVERSION, \
+        FB_CUSTOMER_MATCH, \
+        CM_OFFLINE_CONVERSION, \
         ADS_OFFLINE_CONVERSION, \
         ADS_SSD_UPLOAD, \
         ADS_ENHANCED_CONVERSION, \
@@ -30,7 +32,7 @@ class DestinationType(Enum):
         APPSFLYER_S2S_EVENTS, \
         GA_MEASUREMENT_PROTOCOL, \
         GA_DATA_IMPORT, \
-        GA_4_MEASUREMENT_PROTOCOL = range(12)
+        GA_4_MEASUREMENT_PROTOCOL = range(14)
 
     def __eq__(self, other):
         if other is None:

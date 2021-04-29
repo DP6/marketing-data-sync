@@ -1,0 +1,6 @@
+[tool.semantic_release]
+upload_to_pypi = false
+version_variable = [
+  'megalist_dataflow/setup.py:__version__'
+]
+

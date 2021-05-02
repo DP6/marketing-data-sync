@@ -7,7 +7,7 @@ on:
   push:
     branches: [ develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
   unit_testing:

@@ -1,17 +1,17 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python testing
+name: Python
 
 on:
   push:
     branches: [ develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
   unit_testing:
-
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +27,6 @@ jobs:
     - name: Run tests
       run: |
         ./run_tests.sh
+    - name: Upload coverage to Codacy
+      run: export CODACY_PROJECT_TOKEN=${{ secrets.CODACY_PROJECT_TOKEN }} && bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r megalist_dataflow/*
+      continue-on-error: true

@@ -6,7 +6,7 @@
 # For more information on Codacy Analysis CLI in general, see
 # https://github.com/codacy/codacy-analysis-cli.
 
-name: Codacy
+name: Codacy Analysis
 
 on: ['push']
 

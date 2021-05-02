@@ -4,10 +4,10 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
 
   # Maintain dependencies for npm
   - package-ecosystem: 'pip'
     directory: '/megalist_dataflow'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'

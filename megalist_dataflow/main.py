@@ -21,6 +21,7 @@ from apache_beam.options.pipeline_options import PipelineOptions
 from mappers.ads_ssd_hashing_mapper import AdsSSDHashingMapper
 from mappers.ads_user_list_pii_hashing_mapper import AdsUserListPIIHashingMapper
 from sources.spreadsheet_execution_source import SpreadsheetExecutionSource
+from sources.firestore_execution_source import FirestoreExecutionSource
 from sources.batches_from_executions import BatchesFromExecutions
 from uploaders.appsflyer.appsflyer_s2s_uploader_async import AppsFlyerS2SUploaderDoFn
 from uploaders.campaign_manager.campaign_manager_conversion_uploader import CampaignManagerConversionUploaderDoFn
@@ -185,11 +186,18 @@ def run(argv=None):
         dataflow_options.access_token,
         dataflow_options.refresh_token)
 
-    sheets_config = SheetsConfig(oauth_credentials)
+    if dataflow_options.setup_sheet_id.is_accessible():
+        sheets_config = SheetsConfig(oauth_credentials)
 
     with beam.Pipeline(options=pipeline_options) as pipeline:
-        executions = (pipeline | 'Load executions' >> beam.io.Read(
-            SpreadsheetExecutionSource(sheets_config, dataflow_options.setup_sheet_id)))
+        if dataflow_options.setup_sheet_id.is_accessible():
+            executions = (pipeline | 'Load executions' >> beam.io.Read(
+                SpreadsheetExecutionSource(sheets_config, dataflow_options.setup_sheet_id)))
+        elif dataflow_options.setup_firestore_collection.is_accessible():
+            executions = (pipeline | 'Load executions' >> beam.io.Read(
+                FirestoreExecutionSource(dataflow_options.setup_firestore_collection)))
+        else:
+            raise Exception('No valid parameter source (setup_sheet_id/setup_firestore_collection) included in the arguments')
 
         executions | GoogleAdsSSDStep(
             oauth_credentials, dataflow_options, AdsSSDHashingMapper())

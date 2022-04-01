@@ -11,7 +11,7 @@ jobs:
         working-directory: ./terraform
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2

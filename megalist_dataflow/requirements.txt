@@ -1,6 +1,6 @@
 googleads==24.1.0
 httplib2==0.17.4
-protobuf==3.13.0
+protobuf==4.21.4
 google-api-python-client==1.12.8
 google-cloud-core==1.4.1
 google-cloud-bigquery==1.27.2

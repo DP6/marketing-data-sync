@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: HashiCorp - Setup Terraform
-        uses: hashicorp/setup-terraform@v1.3.2
+        uses: hashicorp/setup-terraform@v2.0.3
         with:
           terraform_version: 0.14.6
 

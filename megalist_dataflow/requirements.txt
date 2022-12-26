@@ -13,7 +13,7 @@ pytest-cov==2.11.1
 pytest-mock==3.2.0
 requests-mock==1.8.0
 pytz==2021.1
-wheel==0.34.2
+wheel==0.38.1
 pyarrow==0.17.1
 aiohttp==3.7.4
 bloom-filter==1.3
